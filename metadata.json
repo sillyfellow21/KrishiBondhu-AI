@@ -1,0 +1,9 @@
+{
+  "name": "KrishiBondhu AI",
+  "description": "Smart agricultural assistant for Bangladeshi farmers featuring AI disease detection, crop advice, and weather alerts.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
