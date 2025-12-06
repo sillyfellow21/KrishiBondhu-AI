@@ -1,4 +1,5 @@
 
+
 import { CropInfo } from './types';
 
 export const TRANSLATIONS = {
@@ -60,7 +61,15 @@ export const TRANSLATIONS = {
     fertilizerFor: "Fertilizer for",
     loanDue: "Loan Repayment Due",
     upcomingReminders: "Upcoming Reminders",
-    noReminders: "No upcoming reminders"
+    noReminders: "No upcoming reminders",
+    // Payment
+    payWithBkash: "Pay with bKash",
+    enterPin: "Enter PIN",
+    confirm: "Confirm",
+    processing: "Processing...",
+    paymentSuccess: "Payment Successful!",
+    merchant: "Merchant",
+    invoice: "Invoice No"
   },
   bn: {
     appTitle: "কৃষিবন্ধু এআই",
@@ -120,7 +129,15 @@ export const TRANSLATIONS = {
     fertilizerFor: "সার প্রয়োগ:",
     loanDue: "ঋণ পরিশোধের সময়",
     upcomingReminders: "আসন্ন রিমাইন্ডার",
-    noReminders: "কোন রিমাইন্ডার নেই"
+    noReminders: "কোন রিমাইন্ডার নেই",
+    // Payment
+    payWithBkash: "বিকাশ পেমেন্ট",
+    enterPin: "পিন নম্বর দিন",
+    confirm: "নিশ্চিত করুন",
+    processing: "প্রক্রিয়াধীন...",
+    paymentSuccess: "পেমেন্ট সফল হয়েছে!",
+    merchant: "মার্চেন্ট",
+    invoice: "ইনভয়েস নং"
   }
 };
 

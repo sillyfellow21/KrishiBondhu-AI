@@ -1,6 +1,7 @@
 
+
 import React, { useState, useEffect } from 'react';
-import { Wallet, Plus, Trash2, CheckCircle, Circle, Calendar as CalendarIcon, ArrowUpRight, X, FileText, Info, History, Bell, BellRing, Pencil } from 'lucide-react';
+import { Wallet, Plus, Trash2, CheckCircle, Circle, Calendar as CalendarIcon, ArrowUpRight, X, FileText, Info, History, Bell, BellRing, Pencil, Zap } from 'lucide-react';
 import { Language, Loan, Reminder } from '../types';
 import { TRANSLATIONS } from '../constants';
 import { requestNotificationPermission, sendNotification, saveReminder } from '../services/notificationService';
@@ -16,6 +17,10 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedLoan, setSelectedLoan] = useState<Loan | null>(null);
   const [viewMode, setViewMode] = useState<'active' | 'history'>('active');
+  const [showPayment, setShowPayment] = useState(false);
+  const [pin, setPin] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  
   const [formData, setFormData] = useState({
     lenderName: '',
     amount: '',
@@ -52,7 +57,6 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
             return loan;
         }));
         setEditingId(null);
-        // If the edited loan was selected (though modal is closed during edit), update it if needed or just clear it
     } else {
         // Create new loan
         const newLoan: Loan = {
@@ -90,8 +94,8 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
       setFormData({ lenderName: '', amount: '', dueDate: '', notes: '' });
   };
 
-  const toggleStatus = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
+  const toggleStatus = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setLoans(prev => prev.map(loan => 
       loan.id === id 
         ? { ...loan, status: loan.status === 'active' ? 'paid' : 'active' } 
@@ -131,6 +135,20 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
     } else {
       alert(t.permissionDenied);
     }
+  };
+
+  const handlePayment = () => {
+      if (!pin) return;
+      setIsProcessing(true);
+      setTimeout(() => {
+          setIsProcessing(false);
+          setShowPayment(false);
+          setPin('');
+          if (selectedLoan) {
+              toggleStatus(selectedLoan.id);
+              alert(t.paymentSuccess);
+          }
+      }, 2000);
   };
 
   const activeLoans = loans.filter(l => l.status === 'active');
@@ -342,7 +360,7 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
       {selectedLoan && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelectedLoan(null)}></div>
-           <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl relative z-10 p-6 animate-in zoom-in-95 duration-200">
+           <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl relative z-10 p-6 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-start mb-6">
                 <div>
                    <h2 className="text-xl font-bold text-slate-800">{t.loanDetails}</h2>
@@ -417,7 +435,15 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
                  )}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-6 flex flex-col gap-3">
+                 {selectedLoan.status === 'active' && (
+                     <button 
+                        onClick={() => setShowPayment(true)}
+                        className="w-full py-3.5 bg-[#e2136e] text-white rounded-xl font-bold hover:bg-[#c40e5e] transition-colors shadow-md flex items-center justify-center gap-2"
+                     >
+                        <Zap size={20} className="fill-white" /> {t.payWithBkash}
+                     </button>
+                 )}
                  <button 
                    onClick={() => setSelectedLoan(null)}
                    className="w-full py-3.5 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition-colors"
@@ -427,6 +453,78 @@ const LoanTracker: React.FC<LoanTrackerProps> = ({ lang }) => {
               </div>
            </div>
         </div>
+      )}
+
+      {/* Mock bKash Payment Modal */}
+      {showPayment && selectedLoan && (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowPayment(false)}></div>
+              <div className="bg-[#e2136e] w-full max-w-xs rounded-2xl overflow-hidden shadow-2xl relative z-10 animate-in zoom-in-95 duration-200">
+                  {/* Header */}
+                  <div className="p-4 flex items-center justify-between border-b border-white/20">
+                      <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                             <Zap size={20} className="text-[#e2136e] fill-[#e2136e]" />
+                          </div>
+                          <span className="text-white font-bold text-lg">bKash Payment</span>
+                      </div>
+                      <button onClick={() => setShowPayment(false)} className="text-white/80 hover:text-white">
+                          <X size={20} />
+                      </button>
+                  </div>
+                  
+                  {/* Body */}
+                  <div className="p-6 bg-white">
+                      <div className="flex justify-between items-center mb-6">
+                          <div>
+                              <p className="text-xs text-slate-500 uppercase font-bold">{t.merchant}</p>
+                              <p className="font-bold text-slate-800">KrishiBondhu</p>
+                          </div>
+                          <div className="text-right">
+                              <p className="text-xs text-slate-500 uppercase font-bold">{t.invoice}</p>
+                              <p className="font-mono text-slate-800">INV-{selectedLoan.id.slice(-4)}</p>
+                          </div>
+                      </div>
+
+                      <div className="bg-slate-100 p-4 rounded-xl mb-6 text-center border border-slate-200">
+                          <p className="text-sm text-slate-500 mb-1">{t.amount}</p>
+                          <p className="text-3xl font-bold text-slate-900">৳ {selectedLoan.amount.toLocaleString()}</p>
+                      </div>
+
+                      <div className="mb-6">
+                          <label className="text-xs font-bold text-slate-500 mb-1 block">{t.enterPin}</label>
+                          <input 
+                            type="password" 
+                            maxLength={5}
+                            value={pin}
+                            onChange={(e) => setPin(e.target.value)}
+                            className="w-full text-center text-2xl tracking-[0.5em] p-3 border-b-2 border-slate-300 focus:border-[#e2136e] outline-none font-bold text-slate-800"
+                            placeholder="•••••"
+                          />
+                      </div>
+
+                      <button 
+                        onClick={handlePayment}
+                        disabled={!pin || isProcessing}
+                        className="w-full py-4 bg-[#e2136e] text-white font-bold rounded-xl shadow-lg hover:bg-[#c40e5e] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                      >
+                        {isProcessing ? (
+                            <>
+                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                {t.processing}
+                            </>
+                        ) : (
+                            t.confirm
+                        )}
+                      </button>
+                  </div>
+                  
+                  {/* Footer */}
+                  <div className="bg-slate-100 p-3 text-center">
+                      <p className="text-[10px] text-slate-400 font-medium">Secured by bKash</p>
+                  </div>
+              </div>
+          </div>
       )}
 
     </div>
