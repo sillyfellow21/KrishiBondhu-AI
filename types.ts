@@ -8,6 +8,14 @@ export interface WeatherData {
   isDay: number;
 }
 
+export interface User {
+  id: string;
+  name: string;
+  phone: string;
+  location?: string;
+  password?: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'model';
@@ -24,6 +32,11 @@ export interface CropInfo {
   plantingTime: string;
   harvestTime: string;
   image: string;
+  // New detailed fields
+  idealTemp?: string;
+  soilType?: string;
+  commonDiseases?: string[];
+  growthDuration?: string;
 }
 
 export interface Loan {
@@ -52,6 +65,7 @@ export enum Tab {
   SCAN = 'SCAN',
   CROPS = 'CROPS',
   LOANS = 'LOANS',
+  PROFILE = 'PROFILE', // New Profile Tab
 }
 
 export interface Coordinates {

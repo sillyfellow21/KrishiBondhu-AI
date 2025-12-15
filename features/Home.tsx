@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Cloud, Wind, Droplets, MapPin, AlertTriangle, ArrowRight, MessageCircle, ScanLine, Wallet, Calendar, Thermometer, Download } from 'lucide-react';
-import { Language, WeatherData, Coordinates, Tab } from '../types';
+import { Cloud, Wind, Droplets, MapPin, AlertTriangle, ArrowRight, MessageCircle, ScanLine, Wallet, Calendar, Thermometer, Download, LogOut } from 'lucide-react';
+import { Language, WeatherData, Coordinates, Tab, User } from '../types';
 import { TRANSLATIONS } from '../constants';
 import { fetchWeather, getWeatherDescription } from '../services/weatherService';
 
 interface HomeProps {
   lang: Language;
   setActiveTab: (tab: Tab) => void;
+  user?: User;
+  onLogout: () => void;
 }
 
-const Home: React.FC<HomeProps> = ({ lang, setActiveTab }) => {
+const Home: React.FC<HomeProps> = ({ lang, setActiveTab, user, onLogout }) => {
   const t = TRANSLATIONS[lang];
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -87,7 +89,9 @@ const Home: React.FC<HomeProps> = ({ lang, setActiveTab }) => {
           <p className="text-slate-500 text-sm font-medium mb-1">
             {new Date().toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long' })}
           </p>
-          <h1 className="text-2xl font-bold text-slate-800">{t.greeting} 👋</h1>
+          <h1 className="text-2xl font-bold text-slate-800">
+            {t.greeting}, {user ? user.name.split(' ')[0] : 'Farmer'} 👋
+          </h1>
         </div>
         <div className="flex items-center gap-2">
             {installPrompt && (
@@ -99,9 +103,12 @@ const Home: React.FC<HomeProps> = ({ lang, setActiveTab }) => {
                     <Download size={20} />
                 </button>
             )}
-            <div className="w-10 h-10 bg-slate-200 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Profile" />
-            </div>
+            <button 
+              onClick={onLogout}
+              className="w-10 h-10 bg-slate-200 rounded-full overflow-hidden border-2 border-white shadow-sm flex items-center justify-center text-slate-500 hover:bg-red-50 hover:text-red-500 transition-colors"
+            >
+                <LogOut size={18} />
+            </button>
         </div>
       </div>
 

@@ -21,36 +21,34 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab, lang }) 
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
-      <div className="max-w-md mx-auto relative">
-        <div className="pointer-events-auto bg-white border-t border-slate-100 shadow-lg pb-safe">
-          <div className="flex justify-around items-center h-16 px-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`relative flex flex-col items-center justify-center w-full h-full space-y-1 transition-all duration-200 group ${
-                    isActive ? 'text-primary-600' : 'text-slate-400 hover:text-slate-600'
-                  }`}
-                >
-                  {isActive && (
-                    <span className="absolute top-0 w-8 h-1 bg-primary-500 rounded-b-full shadow-glow"></span>
-                  )}
-                  <Icon 
-                    size={24} 
-                    strokeWidth={isActive ? 2.5 : 2} 
-                    className={`transition-transform duration-200 ${isActive ? '-translate-y-1' : ''}`}
-                  />
-                  <span className={`text-[10px] font-medium truncate max-w-full transition-opacity duration-200 ${isActive ? 'opacity-100 font-semibold' : 'opacity-70'}`}>
-                    {item.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
+      <div className="max-w-3xl mx-auto w-full">
+        <div className="flex justify-around items-center h-16 px-2">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`relative flex flex-col items-center justify-center w-full h-full space-y-1 transition-all duration-200 group ${
+                  isActive ? 'text-primary-600' : 'text-slate-400 hover:text-slate-600'
+                }`}
+              >
+                {isActive && (
+                  <span className="absolute top-0 w-8 h-1 bg-primary-500 rounded-b-full shadow-glow"></span>
+                )}
+                <Icon 
+                  size={24} 
+                  strokeWidth={isActive ? 2.5 : 2} 
+                  className={`transition-transform duration-200 ${isActive ? '-translate-y-1' : ''}`}
+                />
+                <span className={`text-[10px] font-medium truncate max-w-full transition-opacity duration-200 ${isActive ? 'opacity-100 font-semibold' : 'opacity-70'}`}>
+                  {item.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -1,11 +1,10 @@
 
-
 import { CropInfo } from './types';
 
 export const TRANSLATIONS = {
   en: {
     appTitle: "KrishiBondhu AI",
-    greeting: "Welcome, Farmer",
+    greeting: "Welcome",
     weather: "Weather",
     scanPlant: "Scan Plant",
     chatAssistant: "Agri Chat",
@@ -25,6 +24,8 @@ export const TRANSLATIONS = {
     uploadImage: "Upload Image",
     noImageSelected: "No image selected",
     switchLang: "বাংলা",
+    offline: "You are offline. Showing saved data.",
+    shareResult: "Share Results",
     // Loan Tracker
     loanTracker: "Loan Tracker",
     totalDebt: "Total Active Debt",
@@ -44,11 +45,28 @@ export const TRANSLATIONS = {
     history: "History",
     saveLoan: "Save Loan",
     cancel: "Cancel",
-    noLoans: "No loans found.",
+    noLoans: "No loans found. Add your first loan!",
     delete: "Delete",
     loanDetails: "Loan Details",
     notes: "Notes",
     close: "Close",
+    selectPaymentMethod: "Select Payment Method",
+    // Payment Flow
+    payWithBkash: "Pay with bKash",
+    payWithBank: "Pay with Bank",
+    bankName: "Bank Name",
+    accountNumber: "Account Number",
+    enterPin: "Enter PIN",
+    confirm: "Confirm Payment",
+    processing: "Processing...",
+    paymentSuccess: "Payment Successful!",
+    paymentFailed: "Payment Failed",
+    transactionId: "TrxID",
+    retryPayment: "Retry Payment",
+    goBack: "Go Back",
+    merchant: "Merchant",
+    invoice: "Invoice No",
+    insufficientFunds: "Insufficient funds or wrong PIN",
     // Reminders
     setReminder: "Set Reminder",
     reminderSet: "Reminder set successfully",
@@ -62,18 +80,51 @@ export const TRANSLATIONS = {
     loanDue: "Loan Repayment Due",
     upcomingReminders: "Upcoming Reminders",
     noReminders: "No upcoming reminders",
-    // Payment
-    payWithBkash: "Pay with bKash",
-    enterPin: "Enter PIN",
-    confirm: "Confirm",
-    processing: "Processing...",
-    paymentSuccess: "Payment Successful!",
-    merchant: "Merchant",
-    invoice: "Invoice No"
+    // Auth
+    login: "Login",
+    register: "Sign Up",
+    phoneOrEmail: "Mobile Number (e.g., 017...)",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    fullName: "Full Name",
+    loginSuccess: "Login Successful",
+    logout: "Logout",
+    dontHaveAccount: "Don't have an account?",
+    alreadyHaveAccount: "Already have an account?",
+    invalidPhone: "Invalid BD Mobile Number",
+    fillAllFields: "Please fill all fields",
+    userExists: "User already exists",
+    wrongCredentials: "Wrong mobile number or password",
+    passwordsDontMatch: "Passwords do not match",
+    welcomeBack: "Welcome back",
+    createAccount: "Create Account",
+    forgotPassword: "Forgot Password?",
+    resetPassword: "Reset Password",
+    sendOtp: "Send OTP",
+    enterOtp: "Enter OTP (1234)",
+    newPassword: "New Password",
+    verify: "Verify",
+    otpSent: "OTP sent to your mobile",
+    userNotFound: "User not found",
+    passwordResetSuccess: "Password reset successfully",
+    biometricLogin: "Login with Biometrics",
+    biometricFailed: "Biometric authentication failed",
+    // Profile
+    profile: "Profile",
+    editProfile: "Edit Profile",
+    location: "Location",
+    saveChanges: "Save Changes",
+    // Scanner
+    placeInFrame: "Place crop within the frame",
+    // Crop
+    searchCrops: "Search crops...",
+    idealConditions: "Ideal Conditions",
+    commonIssues: "Common Issues",
+    growthDuration: "Growth Duration",
   },
   bn: {
     appTitle: "কৃষিবন্ধু এআই",
-    greeting: "স্বাগতম, কৃষক বন্ধু",
+    greeting: "স্বাগতম",
     weather: "আবহাওয়া",
     scanPlant: "রোগ নির্ণয়",
     chatAssistant: "সহকারী",
@@ -93,6 +144,8 @@ export const TRANSLATIONS = {
     uploadImage: "ছবি আপলোড করুন",
     noImageSelected: "কোন ছবি নির্বাচিত হয়নি",
     switchLang: "English",
+    offline: "আপনি অফলাইনে আছেন। সংরক্ষিত তথ্য দেখানো হচ্ছে।",
+    shareResult: "ফলাফল শেয়ার করুন",
     // Loan Tracker
     loanTracker: "ঋণ ব্যবস্থাপনা",
     totalDebt: "মোট বর্তমান ঋণ",
@@ -112,11 +165,28 @@ export const TRANSLATIONS = {
     history: "ইতিহাস",
     saveLoan: "সংরক্ষণ করুন",
     cancel: "বাতিল",
-    noLoans: "কোন ঋণ নেই।",
+    noLoans: "কোন ঋণ নেই। আপনার প্রথম ঋণ যোগ করুন!",
     delete: "মুছে ফেলুন",
     loanDetails: "ঋণের বিবরণ",
     notes: "নোট",
     close: "বন্ধ করুন",
+    selectPaymentMethod: "পেমেন্ট মাধ্যম নির্বাচন করুন",
+    // Payment Flow
+    payWithBkash: "বিকাশ পেমেন্ট",
+    payWithBank: "ব্যাংক পেমেন্ট",
+    bankName: "ব্যাংকের নাম",
+    accountNumber: "অ্যাকাউন্ট নম্বর",
+    enterPin: "পিন নম্বর দিন",
+    confirm: "পেমেন্ট নিশ্চিত করুন",
+    processing: "প্রক্রিয়াধীন...",
+    paymentSuccess: "পেমেন্ট সফল হয়েছে!",
+    paymentFailed: "পেমেন্ট ব্যর্থ হয়েছে",
+    transactionId: "TrxID",
+    retryPayment: "আবার চেষ্টা করুন",
+    goBack: "ফিরে যান",
+    merchant: "মার্চেন্ট",
+    invoice: "ইনভয়েস নং",
+    insufficientFunds: "অপর্যাপ্ত ব্যালেন্স বা ভুল পিন",
     // Reminders
     setReminder: "রিমাইন্ডার দিন",
     reminderSet: "রিমাইন্ডার সেট করা হয়েছে",
@@ -130,14 +200,47 @@ export const TRANSLATIONS = {
     loanDue: "ঋণ পরিশোধের সময়",
     upcomingReminders: "আসন্ন রিমাইন্ডার",
     noReminders: "কোন রিমাইন্ডার নেই",
-    // Payment
-    payWithBkash: "বিকাশ পেমেন্ট",
-    enterPin: "পিন নম্বর দিন",
-    confirm: "নিশ্চিত করুন",
-    processing: "প্রক্রিয়াধীন...",
-    paymentSuccess: "পেমেন্ট সফল হয়েছে!",
-    merchant: "মার্চেন্ট",
-    invoice: "ইনভয়েস নং"
+    // Auth
+    login: "লগইন",
+    register: "নিবন্ধন করুন",
+    phoneOrEmail: "মোবাইল নম্বর (যেমন: ০১৭...)",
+    password: "পাসওয়ার্ড",
+    confirmPassword: "পাসওয়ার্ড নিশ্চিত করুন",
+    fullName: "পুরো নাম",
+    loginSuccess: "লগইন সফল হয়েছে",
+    logout: "লগআউট",
+    dontHaveAccount: "অ্যাকাউন্ট নেই?",
+    alreadyHaveAccount: "অ্যাকাউন্ট আছে?",
+    invalidPhone: "ভুল মোবাইল নম্বর",
+    fillAllFields: "সব তথ্য পূরণ করুন",
+    userExists: "এই নম্বরে অ্যাকাউন্ট আছে",
+    wrongCredentials: "ভুল নম্বর বা পাসওয়ার্ড",
+    passwordsDontMatch: "পাসওয়ার্ড মিলছে না",
+    welcomeBack: "স্বাগতম",
+    createAccount: "অ্যাকাউন্ট তৈরি করুন",
+    forgotPassword: "পাসওয়ার্ড ভুলে গেছেন?",
+    resetPassword: "পাসওয়ার্ড রিসেট",
+    sendOtp: "ওটিপি পাঠান",
+    enterOtp: "ওটিপি দিন (1234)",
+    newPassword: "নতুন পাসওয়ার্ড",
+    verify: "যাচাই করুন",
+    otpSent: "আপনার মোবাইলে ওটিপি পাঠানো হয়েছে",
+    userNotFound: "ব্যবহারকারী খুঁজে পাওয়া যায়নি",
+    passwordResetSuccess: "পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে",
+    biometricLogin: "বায়োমেট্রিক লগইন",
+    biometricFailed: "বায়োমেট্রিক শনাক্তকরণ ব্যর্থ হয়েছে",
+    // Profile
+    profile: "প্রোফাইল",
+    editProfile: "প্রোফাইল সম্পাদনা",
+    location: "অবস্থান",
+    saveChanges: "পরিবর্তন সংরক্ষণ করুন",
+    // Scanner
+    placeInFrame: "শস্য ফ্রেমের মধ্যে রাখুন",
+    // Crop
+    searchCrops: "ফসল খুঁজুন...",
+    idealConditions: "উপযুক্ত পরিবেশ",
+    commonIssues: "সাধারণ রোগবালাই",
+    growthDuration: "জীবনকাল",
   }
 };
 
@@ -149,7 +252,11 @@ export const CROPS: CropInfo[] = [
     season: 'Robi',
     plantingTime: 'Dec - Feb',
     harvestTime: 'Apr - May',
-    image: 'https://images.unsplash.com/photo-1599940778173-e276d4acb2be?auto=format&fit=crop&q=80&w=400', 
+    image: 'https://images.unsplash.com/photo-1599940778173-e276d4acb2be?auto=format&fit=crop&q=80&w=400',
+    idealTemp: '20°C - 30°C',
+    soilType: 'Clay or Clay Loam',
+    commonDiseases: ['Blast', 'Bacterial Blight'],
+    growthDuration: '140-155 Days'
   },
   {
     id: '2',
@@ -159,6 +266,10 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Mar - Apr',
     harvestTime: 'Jul - Aug',
     image: 'https://images.unsplash.com/photo-1616428780721-a3f5a0c32608?auto=format&fit=crop&q=80&w=400',
+    idealTemp: '24°C - 35°C',
+    soilType: 'Alluvial Soil',
+    commonDiseases: ['Stem Rot', 'Mosaic Virus'],
+    growthDuration: '120 Days'
   },
   {
     id: '3',
@@ -168,6 +279,10 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Nov - Dec',
     harvestTime: 'Feb - Mar',
     image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&q=80&w=400',
+    idealTemp: '15°C - 20°C',
+    soilType: 'Sandy Loam',
+    commonDiseases: ['Late Blight', 'Scab'],
+    growthDuration: '90-100 Days'
   },
   {
     id: '4',
@@ -177,6 +292,10 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Jun - Jul',
     harvestTime: 'May - Jul',
     image: 'https://images.unsplash.com/photo-1627885060699-0d3221975e53?auto=format&fit=crop&q=80&w=400',
+    idealTemp: '24°C - 30°C',
+    soilType: 'Deep Loam',
+    commonDiseases: ['Anthracnose', 'Powdery Mildew'],
+    growthDuration: 'Perennial'
   },
   {
     id: '5',
@@ -186,6 +305,10 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Nov - Dec',
     harvestTime: 'Mar - Apr',
     image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=400',
+    idealTemp: '15°C - 25°C',
+    soilType: 'Loam',
+    commonDiseases: ['Rust', 'Blast'],
+    growthDuration: '100-110 Days'
   },
   {
     id: '6',
@@ -195,6 +318,7 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Oct - Nov',
     harvestTime: 'Jan - Feb',
     image: 'https://images.unsplash.com/photo-1506543730500-1738e9a25b24?auto=format&fit=crop&q=80&w=400',
+    growthDuration: '80-90 Days'
   },
   {
     id: '7',
@@ -204,6 +328,7 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Oct - Nov',
     harvestTime: 'Feb - Mar',
     image: 'https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&q=80&w=400',
+    growthDuration: '100-110 Days'
   },
   {
     id: '8',
@@ -213,6 +338,7 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Sep - Oct',
     harvestTime: 'Dec - Jan',
     image: 'https://images.unsplash.com/photo-1615485925763-867862f80c55?auto=format&fit=crop&q=80&w=400',
+    growthDuration: '130-150 Days'
   },
   {
     id: '9',
@@ -222,6 +348,7 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Dec - Jan',
     harvestTime: 'Mar - Apr',
     image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&q=80&w=400',
+    growthDuration: '100-120 Days'
   },
   {
     id: '10',
@@ -231,15 +358,7 @@ export const CROPS: CropInfo[] = [
     plantingTime: 'Oct - Nov',
     harvestTime: 'Feb - Mar',
     image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&q=80&w=400',
-  },
-  {
-    id: '11',
-    nameEn: 'Tea',
-    nameBn: 'চা',
-    season: 'Year-round',
-    plantingTime: 'May - Jun',
-    harvestTime: 'Weekly',
-    image: 'https://images.unsplash.com/photo-1588713437158-b38466657c91?auto=format&fit=crop&q=80&w=400',
+    growthDuration: '90-100 Days'
   }
 ];
 
